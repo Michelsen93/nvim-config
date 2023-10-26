@@ -35,9 +35,13 @@ return require('packer').startup(function(use)
     tag = '0.1.0',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
-  use 'dart-lang/dart-vim-plugin'
-  use 'akinsho/flutter-tools.nvim'
-  
+  use {
+    'akinsho/flutter-tools.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim',
+    },
+  }
   -- My plugins here
   -- use 'foo1/bar1.nvim'
   -- use 'foo2/bar2.nvim'
