@@ -109,6 +109,11 @@ _G.packer_plugins = {
     path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
     url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
+  harpoon = {
+    loaded = true,
+    path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/theprimeagen/harpoon"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/lualine.nvim",

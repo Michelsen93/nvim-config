@@ -42,6 +42,7 @@ return require('packer').startup(function(use)
       'stevearc/dressing.nvim',
     },
   }
+  use 'theprimeagen/harpoon'
   -- My plugins here
   -- use 'foo1/bar1.nvim'
   -- use 'foo2/bar2.nvim'
