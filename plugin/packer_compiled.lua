@@ -94,6 +94,12 @@ _G.packer_plugins = {
     path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/dressing.nvim",
     url = "https://github.com/stevearc/dressing.nvim"
   },
+  ["fidget.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0" },
+    loaded = true,
+    path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
+  },
   ["flutter-tools.nvim"] = {
     loaded = true,
     path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
@@ -103,11 +109,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
-  },
-  ["gruvbox.nvim"] = {
-    loaded = true,
-    path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
-    url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
   harpoon = {
     loaded = true,
@@ -128,6 +129,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["night-owl.nvim"] = {
+    loaded = true,
+    path = "/Users/olemartinm/.local/share/nvim/site/pack/packer/start/night-owl.nvim",
+    url = "https://github.com/oxfist/night-owl.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -172,6 +178,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: fidget.nvim
+time([[Config for fidget.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
+time([[Config for fidget.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

@@ -1,4 +1,5 @@
-require("mason").setup()
+require("mason").setup();
+local lsp_config = require("lspconfig");
 require("mason-lspconfig").setup({
   ensure_installed = { "lua_ls", "svelte", "tsserver", "gopls", "html",  }
 })
@@ -22,3 +23,19 @@ require('lspconfig').lua_ls.setup {
 }
 
 
+
+lsp_config["dartls"].setup({
+  on_attach = on_attach,
+  settings = {
+    dart = {
+      analysisExlcudedFolders = {
+        vim.fn.expand("HOME/AppData/Local/Pub/Cache"),
+        vim.fn.expand("Home/.pub-cache"),
+        vim.fn.expand("/opt/homebrew"),
+        vim.fn.expand("$HOME/tools/flutter"),
+      },
+    }
+  },
+})
+
+require("fidget").setup({})
