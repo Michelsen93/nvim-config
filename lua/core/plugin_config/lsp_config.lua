@@ -1,7 +1,7 @@
 require("mason").setup();
 local lsp_config = require("lspconfig");
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "svelte", "tsserver", "gopls", "html",  }
+  ensure_installed = { "lua_ls", "svelte", "gopls", "html"  }
 })
 
 local on_attach = function(_,_)
@@ -10,7 +10,7 @@ local on_attach = function(_,_)
 
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
-  vim.keymap.set('n', 'gr', require('telescop.builtin').lsp_references, {})
+  vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {})
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 end
 
@@ -22,7 +22,10 @@ require('lspconfig').lua_ls.setup {
   capabilities = capabilities,
 }
 
-
+lsp_config["gopls"].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 
 lsp_config["dartls"].setup({
   on_attach = on_attach,
