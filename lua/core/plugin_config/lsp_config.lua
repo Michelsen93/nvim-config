@@ -1,7 +1,8 @@
 require("mason").setup();
 local lsp_config = require("lspconfig");
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "svelte", "gopls", "html"  }
+  ensure_installed = { "lua_ls", "svelte", "gopls", "html", 'eslint', 'jsonls', 'cssls' },
+  automatic_installation = true,
 })
 
 local on_attach = function(_,_)
@@ -40,5 +41,27 @@ lsp_config["dartls"].setup({
     }
   },
 })
+
+lsp_config['cssls'].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+lsp_config['eslint'].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+lsp_config['jsonls'].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+lsp_config['tsserver'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  cmd = { "typescript-language-server", "--stdio" }
+}
 
 require("fidget").setup({})
