@@ -17,6 +17,11 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+require('lspconfig').biome.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 
 require('lspconfig').lua_ls.setup {
   on_attach = on_attach,
@@ -40,21 +45,6 @@ lsp_config["dartls"].setup({
       },
     }
   },
-})
-
-lsp_config['cssls'].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lsp_config['eslint'].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lsp_config['jsonls'].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
 })
 
 lsp_config['tsserver'].setup {
