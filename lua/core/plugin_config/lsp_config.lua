@@ -50,8 +50,10 @@ lsp_config["dartls"].setup({
 lsp_config['tsserver'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-  cmd = { "typescript-language-server", "--stdio" }
+}
+lsp_config['cssls'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 require("fidget").setup({})
