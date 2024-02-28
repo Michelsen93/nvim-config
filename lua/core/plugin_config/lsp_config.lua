@@ -33,6 +33,11 @@ lsp_config["gopls"].setup({
   capabilities = capabilities,
 })
 
+lsp_config["zls"].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
 lsp_config["dartls"].setup({
   on_attach = on_attach,
   settings = {
