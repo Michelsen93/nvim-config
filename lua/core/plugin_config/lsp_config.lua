@@ -12,6 +12,8 @@ require("mason-lspconfig").setup({
 		"rust_analyzer",
 		"zls",
 		"tsserver",
+        "omnisharp",
+        "templ",
 	},
 	automatic_installation = true,
 })
@@ -28,6 +30,11 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+lsp_config["templ"].setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+vim.filetype.add({ extension = { templ = "templ" } })
 lsp_config["biome"].setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -38,12 +45,12 @@ lsp_config["rust_analyzer"].setup({
 	capabilities = capabilities,
 })
 
-lsp_config["gopls"].setup({
+lsp_config["omnisharp"].setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
 
-lsp_config["zls"].setup({
+lsp_config["gopls"].setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
