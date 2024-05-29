@@ -40,6 +40,11 @@ lsp_config["biome"].setup({
 	capabilities = capabilities,
 })
 
+lsp_config["htmx"].setup({
+    on_attach = on_attach,
+    capabilities = capabilites,
+})
+
 lsp_config["rust_analyzer"].setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
