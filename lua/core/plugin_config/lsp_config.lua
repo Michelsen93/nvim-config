@@ -1,7 +1,7 @@
 require("mason").setup()
 local lsp_config = require("lspconfig")
-require("mason-lspconfig").setup({
-    ensure_installed = {
+
+local lsp_servers =  {
         "lua_ls",
         "svelte",
         "gopls",
@@ -17,7 +17,11 @@ require("mason-lspconfig").setup({
         "dockerls",
         "html",
         "htmx",
-    },
+        "bashls"
+}
+
+require("mason-lspconfig").setup({
+    ensure_installed = lsp_servers,
     automatic_installation = true,
 })
 
@@ -33,74 +37,11 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-lsp_config["templ"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-vim.filetype.add({ extension = { templ = "templ" } })
-
-lsp_config["biome"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
-lsp_config["dockerls"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
-lsp_config["htmx"].setup({
-    on_attach = on_attach,
-    capabilities = capabilites,
-})
-
-lsp_config["html"].setup({
-    on_attach = on_attach,
-    capabilities = capabilites,
-})
-
-lsp_config["rust_analyzer"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
-lsp_config["omnisharp"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
-lsp_config["gopls"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
-lsp_config["zls"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-lsp_config["dartls"].setup({
-	settings = {
-		dart = {
-			analysisExlcudedFolders = {
-				vim.fn.expand("HOME/AppData/Local/Pub/Cache"),
-				vim.fn.expand("Home/.pub-cache"),
-				vim.fn.expand("/opt/homebrew"),
-				vim.fn.expand("$HOME/tools/flutter"),
-			},
-		},
-	},
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
-lsp_config["tsserver"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-lsp_config["cssls"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
+for _, lsp_server in ipairs(lsp_servers) do
+    lsp_config[lsp_server].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+    })
+end
 
 require("fidget").setup({})
