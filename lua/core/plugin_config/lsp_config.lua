@@ -3,6 +3,7 @@ local lsp_config = require("lspconfig")
 
 local lsp_servers =  {
         "lua_ls",
+        "terraformls",
         "svelte",
         "gopls",
         "html",
