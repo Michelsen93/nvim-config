@@ -18,13 +18,15 @@ local lsp_servers =  {
         "dockerls",
         "html",
         "htmx",
-        "bashls"
+        "bashls",
 }
 
 require("mason-lspconfig").setup({
     ensure_installed = lsp_servers,
     automatic_installation = true,
 })
+
+vim.filetype.add({ extension = { templ = "templ" } })
 
 local on_attach = function(_, _)
     vim.keymap.set("n", "<Space>rn", vim.lsp.buf.rename, {})
@@ -44,5 +46,20 @@ for _, lsp_server in ipairs(lsp_servers) do
         capabilities = capabilities,
     })
 end
+
+lsp_config["dartls"].setup({
+	settings = {
+		dart = {
+			analysisExlcudedFolders = {
+				vim.fn.expand("HOME/AppData/Local/Pub/Cache"),
+				vim.fn.expand("Home/.pub-cache"),
+				vim.fn.expand("/opt/homebrew"),
+				vim.fn.expand("$HOME/tools/flutter"),
+			},
+		},
+	},
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
 
 require("fidget").setup({})
