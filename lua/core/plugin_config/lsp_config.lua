@@ -19,6 +19,7 @@ local lsp_servers =  {
         "html",
         "htmx",
         "bashls",
+        "yamlls",
 }
 
 require("mason-lspconfig").setup({
