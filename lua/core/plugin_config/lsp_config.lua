@@ -20,6 +20,7 @@ local lsp_servers =  {
         "htmx",
         "bashls",
         "yamlls",
+        "bicep"
 }
 
 require("mason-lspconfig").setup({
