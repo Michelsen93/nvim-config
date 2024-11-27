@@ -16,6 +16,7 @@ return require("packer").startup(function(use)
 	use("oxfist/night-owl.nvim")
 	use("nvim-tree/nvim-web-devicons")
 	use({ "rose-pine/neovim", as = "rose-pine" })
+use 'navarasu/onedark.nvim'
 	use("nvim-lualine/lualine.nvim")
 	use({
 		"nvim-treesitter/nvim-treesitter",
