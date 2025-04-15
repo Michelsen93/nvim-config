@@ -12,7 +12,7 @@ local lsp_servers =  {
         "cssls",
         "rust_analyzer",
         "zls",
-        "tsserver",
+        "ts_ls",
         "omnisharp",
         "templ",
         "dockerls",
