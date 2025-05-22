@@ -26,7 +26,14 @@ require("mason-lspconfig").setup({
     automatic_installation = true,
 })
 
-vim.filetype.add({ extension = { templ = "templ" } })
+vim.filetype.add({
+    extension = {
+        templ = "templ",
+        tf = "terraform",
+        tfvars = "terraform",
+    }
+})
+
 
 local on_attach = function(_, _)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
