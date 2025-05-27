@@ -3,6 +3,7 @@ local lsp_config = require("lspconfig")
 
 local lsp_servers = {
     "lua_ls",
+    "helm_ls",
     "terraformls",
     "gopls",
     "html",
@@ -34,6 +35,13 @@ vim.filetype.add({
     }
 })
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = { "*/templates/*.yaml", "*/templates/*.tpl" },
+    callback = function()
+        vim.bo.filetype = "helm"
+    end,
+})
+
 
 local on_attach = function(_, _)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -56,6 +64,20 @@ for _, lsp_server in ipairs(lsp_servers) do
         capabilities = capabilities,
     })
 end
+
+require('lspconfig').helm_ls.setup {
+    filetypes = { 'helm' },
+    cmd = { 'helm_ls', 'serve' },
+    settings = {
+        ['helm-ls'] = {
+            yamlls = {
+                enabled = true,
+            }
+        }
+    },
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
 
 lsp_config["dartls"].setup({
     settings = {

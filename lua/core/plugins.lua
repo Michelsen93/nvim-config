@@ -12,6 +12,7 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require("packer").startup(function(use)
+    use ('towolf/vim-helm')
     use("wbthomason/packer.nvim")
     use("oxfist/night-owl.nvim")
     use("nvim-tree/nvim-web-devicons")
