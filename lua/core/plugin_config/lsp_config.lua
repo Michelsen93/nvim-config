@@ -1,9 +1,10 @@
 require("mason").setup()
 local lsp_config = require("lspconfig")
 
+
 local lsp_servers = {
     "lua_ls",
-    "helm_ls",
+    "kotlin_lsp",
     "terraformls",
     "gopls",
     "html",
@@ -35,6 +36,7 @@ vim.filetype.add({
     }
 })
 
+
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = { "*/templates/*.yaml", "*/templates/*.tpl" },
     callback = function()
@@ -65,19 +67,23 @@ for _, lsp_server in ipairs(lsp_servers) do
     })
 end
 
-require('lspconfig').helm_ls.setup {
-    filetypes = { 'helm' },
-    cmd = { 'helm_ls', 'serve' },
+lsp_config.yamlls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "yaml", "helm" },
+})
+
+lsp_config.helm_ls.setup({
+    filetypes = { "helm" },
+    cmd = { "helm_ls", "serve" },
     settings = {
         ['helm-ls'] = {
-            yamlls = {
-                enabled = true,
-            }
+            yamlls = { enabled = true }
         }
     },
     on_attach = on_attach,
     capabilities = capabilities,
-}
+})
 
 lsp_config["dartls"].setup({
     settings = {
