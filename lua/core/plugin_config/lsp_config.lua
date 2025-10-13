@@ -42,35 +42,19 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     end,
 })
 
+local diagnostics = require("core.plugin_config.diagnostics")
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    diagnostics.setup(bufopts)
 
-    vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, bufopts)
     vim.keymap.set("n", "<Space>rn", vim.lsp.buf.rename, bufopts)
     vim.keymap.set("n", "<Space>ca", vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set("n", "<Space>pr", function() vim.lsp.buf.format({ async = true }) end, bufopts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
     vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, bufopts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', '<Space>pr', function() vim.lsp.buf.format { async = true } end, bufopts)
-    vim.keymap.set("n", "<Space>de", vim.diagnostic.open_float, bufopts)
-    vim.keymap.set("n", "<Space>dn", function()
-        vim.diagnostic.goto_next({ float = { border = "rounded" } })
-    end, bufopts)
-    vim.keymap.set("n", "<Space>dp", function()
-        vim.diagnostic.goto_prev({ float = { border = "rounded" } })
-    end, bufopts)
-
-    local ok, telescope = pcall(require, "telescope.builtin")
-    if ok then
-        vim.keymap.set("n", "<Space>da", telescope.diagnostics, bufopts)
-    end
-
-    vim.keymap.set("n", "<Space>dv", function()
-        local current = vim.diagnostic.config().virtual_text
-        vim.diagnostic.config({ virtual_text = not current })
-    end, bufopts)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
