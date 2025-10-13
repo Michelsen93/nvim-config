@@ -4,10 +4,8 @@ local lsp_config = require("lspconfig")
 
 local lsp_servers = {
     "lua_ls",
-    "kotlin_lsp",
     "terraformls",
     "gopls",
-    "html",
     "jsonls",
     "cssls",
     "rust_analyzer",
@@ -20,7 +18,7 @@ local lsp_servers = {
     "htmx",
     "bashls",
     "yamlls",
-    "bicep"
+    "bicep",
 }
 
 require("mason-lspconfig").setup({
@@ -45,7 +43,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 
-local on_attach = function(_, _)
+local on_attach = function(client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
     vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, bufopts)
@@ -86,11 +84,12 @@ lsp_config.helm_ls.setup({
 })
 
 lsp_config["dartls"].setup({
+    root_dir = require("lspconfig").util.root_pattern("pubspec.yaml"),
     settings = {
         dart = {
-            analysisExlcudedFolders = {
-                vim.fn.expand("HOME/AppData/Local/Pub/Cache"),
-                vim.fn.expand("Home/.pub-cache"),
+            analysisExcludedFolders = {
+                vim.fn.expand("$HOME/AppData/Local/Pub/Cache"),
+                vim.fn.expand("$HOME/.pub-cache"),
                 vim.fn.expand("/opt/homebrew"),
                 vim.fn.expand("$HOME/tools/flutter"),
             },
@@ -98,6 +97,7 @@ lsp_config["dartls"].setup({
     },
     on_attach = on_attach,
     capabilities = capabilities,
+
 })
 
 require("fidget").setup({})
