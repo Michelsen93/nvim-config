@@ -42,32 +42,16 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     end,
 })
 
-local diagnostics = require("core.plugin_config.diagnostics")
-
-local on_attach = function(_, bufnr)
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    diagnostics.setup(bufopts)
-
-    vim.keymap.set("n", "<Space>rn", vim.lsp.buf.rename, bufopts)
-    vim.keymap.set("n", "<Space>ca", vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set("n", "<Space>pr", function() vim.lsp.buf.format({ async = true }) end, bufopts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, bufopts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 for _, lsp_server in ipairs(lsp_servers) do
     lsp_config[lsp_server].setup({
-        on_attach = on_attach,
         capabilities = capabilities,
     })
 end
 
 lsp_config.yamlls.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
     filetypes = { "yaml", "helm" },
 })
@@ -80,25 +64,7 @@ lsp_config.helm_ls.setup({
             yamlls = { enabled = true }
         }
     },
-    on_attach = on_attach,
     capabilities = capabilities,
-})
-
-lsp_config["dartls"].setup({
-    root_dir = require("lspconfig").util.root_pattern("pubspec.yaml"),
-    settings = {
-        dart = {
-            analysisExcludedFolders = {
-                vim.fn.expand("$HOME/AppData/Local/Pub/Cache"),
-                vim.fn.expand("$HOME/.pub-cache"),
-                vim.fn.expand("/opt/homebrew"),
-                vim.fn.expand("$HOME/tools/flutter"),
-            },
-        },
-    },
-    on_attach = on_attach,
-    capabilities = capabilities,
-
 })
 
 require("fidget").setup({})
