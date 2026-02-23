@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# 99 AI agent temporary files
+tmp/
+
+# Auto-generated plugin files
+plugin/
+
+# Lazy.nvim lockfile (optional - uncomment to ignore)
+# lazy-lock.json
